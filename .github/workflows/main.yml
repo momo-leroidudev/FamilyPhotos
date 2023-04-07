@@ -26,12 +26,6 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
         env:
           update: true
-          
-      - name : Composer Install
-        run: composer install
-        
-      - name : Generate Static Dump
-        run: php bin/console dump-static-site
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
