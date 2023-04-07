@@ -15,33 +15,71 @@ permissions:
   contents: read
 
 jobs:
-  symfony-tests:
+  # symfony-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
+  #   # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
+  #   # uses: shivammathur/setup-php@v2
+  #   - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
+  #     with:
+  #       php-version: '8.2.4'
+  #   - uses: actions/checkout@v3
+  #   - name: Copy .env.test.local
+  #     run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+  #   - name: Cache Composer packages
+  #     id: composer-cache
+  #     uses: actions/cache@v3
+  #     with:
+  #       path: vendor
+  #       key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+  #       restore-keys: |
+  #         ${{ runner.os }}-php-
+  #   - name: Install Dependencies
+  #     run: composer install 
+  #   - name: Create Database
+  #     run: |
+  #       mkdir -p data
+  #       touch data/database.sqlite
+  #   - name: Execute tests (Unit and Feature tests) via PHPUnit
+  #     env:
+  #       DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
+  #     run: vendor/bin/phpunit
+  deploy:
     runs-on: ubuntu-latest
+    
+    env:
+
+      BASE_URL: ${{ secrets.BASE_URL }}
+      
+    strategy:
+      fail-fast: true
+      matrix:
+        php-versions: ['8.2.4']
+        
     steps:
-    #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
-    # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
-    # uses: shivammathur/setup-php@v2
-    - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
-      with:
-        php-version: '8.2.4'
-    - uses: actions/checkout@v3
-    - name: Copy .env.test.local
-      run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-    - name: Install Dependencies
-      run: composer install 
-    - name: Create Database
-      run: |
-        mkdir -p data
-        touch data/database.sqlite
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
-      run: vendor/bin/phpunit
+      # Setup Github actions
+      # https://github.com/actions/checkout (official)
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      # https://github.com/shivammathur/setup-php (community)
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
+        env:
+          update: true
+          
+      - name : Composer Install
+        run: composer install
+        
+      - name : Generate Static Dump
+        run: php bin/console dump-static-site
+        
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output

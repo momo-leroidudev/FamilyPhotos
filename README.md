@@ -40,7 +40,6 @@ Symfony has four different ways on how you could create a project. In my persona
 In order to use the Symfony installer, we got to make sure that we create a Binary. Therefore, we need to perform the following command depending on your OS:
 ```
 Mac -  curl -sS https://get.symfony.com/cli/installer | bash
-Linux - wget https://get.symfony.com/cli/installer -O - | bash
 Windows – Download the setup.exe right here -> https://get.symfony.com/cli/setup.exe
 ```
 
@@ -50,11 +49,21 @@ export PATH=”$HOME/.symfony/bin:$PATH”
 ```
 
 ## 3. Git clone 
+Ouvrir une invite de commande ou tu veux telecharger le projet : 
+
 ```
 git clone https://github.com/momo-leroidudev/FamilyPhotos.git
 ```
 
 ## 4. Installation depencies
+
+Rentre dans le dossier que tu as cloné : 
+
+```
+cd FamilyPhotos
+```
+
+et ensuite dans ton invite de commande :
 
 ```
 composer install
