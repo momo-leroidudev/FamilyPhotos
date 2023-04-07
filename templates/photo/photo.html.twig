@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href={{ asset("index_photo.css") }} rel="stylesheet">
+{% endblock %}
+
+{% block title %}Hello PhotoController!{% endblock %}
+
+{% block body %}
+    
+    {# -------------- DEBUT - header_photo -------------- #}	
+
+    <header>
+        <div class="header_photo">
+            <h1> {{ title }} ! </h1>
+        </div>
+    </header>
+
+    {# -------------- FIN - header_photo -------------- #}	
+
+
+	{# -------------- DEBUT - container_photo -------------- #}	
+
+    <container class='container_photo'>
+        
+        <div class="content-sidebar">
+            <div class="txt-sidebar">
+                Vous avez {{ nbr }} photo(s) dans votre album.
+            </div>
+            {% include 'commun/barre_droite.html.twig' %}
+        </div>
+
+        <content class='content'>
+            {% for photo in photos %}
+                <div class="content-photo">
+                    <img src="{{asset('photos/' ~ photo )}}" alt="photo_1" class="photo">  
+                </div>
+                
+            {% endfor %} 
+		
+		</content>
+
+    </container>
+
+    {# -------------- FIN - container_photo -------------- #}	
+
+
+{% endblock %}

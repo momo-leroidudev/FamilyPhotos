@@ -1,0 +1,105 @@
+body {
+    background: linear-gradient(90deg, #8360c3, #2ebf91);
+    background-size: cover;
+    /*background-color: rgb(94 234 212);*/
+}
+
+.header_photo {
+    /* background: yellow; */
+    text-align: center; 
+    font: 25px / 1.5 sans-serif;
+}
+
+.container_photo {
+    /* background: blueviolet; */
+    position: relative;
+}
+
+.content-sidebar{
+    /* background-color: brown; */
+    width: 21%;
+    position: fixed;  
+}
+
+.txt-sidebar{
+    text-align: left; 
+    font-size: 25px;
+}
+
+.sidebar-gauche {
+    display: flex;
+    /* background: green; */
+    justify-content: space-around;
+    flex-direction: column;
+    height: 450px; 
+    width: fit-content;
+}
+
+.content{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* background: blue; */
+    margin-bottom: 25px;
+    margin-right: auto;
+    margin-left: 21%;
+}
+
+.content-photo{
+    width: auto;
+    height: fit-content;
+    background-color: #000000;
+    border: 1rem solid;
+    border-radius: 30px;
+}
+
+.photo{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.button {
+    background-color: #000000;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #eeeeee;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    transition: all 0.5s;
+    cursor: pointer;
+    width: 250px;
+    height: 100px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: "\00bb";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+button:hover {
+    background-color: #808080;
+}
+
+button:hover span {
+    padding-right: 25px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}

@@ -1,0 +1,27 @@
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset("barre_droite.css") }}>
+{% endblock %}
+
+{# barre droite #}
+{% block body  %}	
+	<side class='sidebar-gauche'>
+        {# {{ dump(app.request.attributes.get('_route')) }} #}
+            
+        <a href="{{ path(routeGenerator(app.request.attributes.get('_route'), 1)['route']) }}">
+            <button class="button" type="button">
+                {{ routeGenerator(app.request.attributes.get('_route'), 1)['texte'] }}
+            </button>
+        </a>
+        <a href="{{ path(routeGenerator(app.request.attributes.get('_route'), 2)['route']) }}">
+            <button class="button" type="button">
+                {{ routeGenerator(app.request.attributes.get('_route'), 2)['texte'] }}
+            </button>
+        </a>
+     
+    </side>
+
+                            
+
+{% endblock %}

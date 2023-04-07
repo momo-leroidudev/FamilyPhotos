@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={{ asset("index_accueil.css") }}>
+{% endblock %}
+
+{# Page d'accueil de ton site photos #}
+{% block title %}
+	FamilyPhotos
+{% endblock %}
+
+{% block body  %}
+	{# -------------- DEBUT - header_accueil -------------- #}
+
+	<header>
+		<div class='header_accueil'>
+			<p>{{ titre_page_accueil }} !</p>
+		</div>
+	</header>
+	{# -------------- FIN - .header_accueil -------------- #}
+
+
+	{# -------------- DEBUT - container_accueil -------------- #}	
+	
+	<container class='container_accueil'>	
+		{# importer le code de la barre droite #}
+        {% include 'commun/barre_droite.html.twig'  %}
+
+		{# carroussel de photos #}
+		<content class='content'>
+			<marquee behavior="scroll" scrollamount="10" scrolldelay="3">
+				<img src="https://tse3.mm.bing.net/th?id=OIP.wJoiT8jVgVEtjxyi9paYAAHaEP&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse4.mm.bing.net/th?id=OIP.3XWbpN-a0pIMQo2RfTw6fQHaEK&pid=Api" alt="photo_accueil" class="photo"> 
+				<img src="https://tse3.mm.bing.net/th?id=OIP.LaftZDROP3INAJiGHZpVjAHaE8&pid=Api" alt="photo_accueil" class="photo"> 
+				<img src="https://tse4.mm.bing.net/th?id=OIP.pQJMuKuy78V1HtXttW4lHgHaE7&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse4.mm.bing.net/th?id=OIP.agaB_9MH_wmQ9Xl-qiychAHaF7&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse3.mm.bing.net/th?id=OIP.ygQLf6nbLgYUgQSyZp5HOAHaE7&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse1.mm.bing.net/th?id=OIP.fTVYnjZfzHK2oXUE9Q6U2AHaEK&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse4.mm.bing.net/th?id=OIP.FoO1gTQl54F6K5-hOptajwHaE7&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse3.mm.bing.net/th?id=OIP.ZGnhB2YY40HhFZEnUILchAHaE8&pid=Api" alt="photo_accueil" class="photo">
+				<img src="https://tse3.mm.bing.net/th?id=OIP.kAysa7ELFXV0yE6l58u5EAHaE8&pid=Api" alt="photo_accueil" class="photo">
+			</marquee>
+		</content>
+	
+	</container>
+		
+	{# -------------- FIN - container_accueil -------------- #}
+	
+{% endblock %}
